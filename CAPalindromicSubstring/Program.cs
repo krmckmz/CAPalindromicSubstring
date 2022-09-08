@@ -2,7 +2,7 @@
 {
     static void Main(string[] args)
     {
-        var s = "twbiqwtafgjbtolwprpdnymaatlbuacrmzzwhkpvuwdtyfjsbsqxrlxxtqkjlpkvpxmlajdmnyepsmczmmfdtjfbyybotpoebilayqzvqztqgddpcgpelwmriwmoeeilpetbxoyktizwcqeeivzgxacuotnlzutdowiudwuqnghjgoeyojikjhlmcsrctvnahnoapmkcrqmwixpbtirkasbyajenknuccojooxfwdeflmxoueasvuovcayisflogtpxtbvcxfmydjupwihnxlpuxxcclbhvutvvshcaikuedhyuksbwwjsnssizoedjkbybwndxpkwcdxaexagazztuiuxphxcedqstahmevkwlayktrubjypzpaiwexkwbxcrqhkpqevhxbyipkmlqmmmogrnexsztsbkvebjgybrolttvnidnntpgvsawgaobycfaaviljsvyuaanguhohsepbthgjyqkicyaxkytshqmtxhilcjxdpcbmvnpippdrpggyohwyswuydyrhczlxyyzregpvxyfwpzvmjuukswcgpenygmnfwdlryobeginxwqjhxtmbpnccwdaylhvtkgjpeyydkxcqarkwvrmwbxeetmhyoudfuuwxcviabkqyhrvxbjmqcqgjjepmalyppymatylhdrazxytixtwwqqqlrcusxyxzymrnryyernrxbgrphsioxrxhmxwzsytmhnosnrpwtphaunprdtbpwapgjjqcnykgspjsxslxztfsuflijbeebwyyowjzpsbjcdabxmxhtweppffglvhfloprfavduzbgkw";
+        var s = "cbbd";
         var result = LongestPalindrome(s);
         Console.WriteLine(result);
         Console.ReadLine();
@@ -15,15 +15,27 @@
         if (IsPalindrome(s))
             return s;
         else
-            for (int i = 0; i < s.Length; i++)
-                for (int j = i; j <= s.Length; j++)
-                {
-                    string palindromeCandidant = s.Substring(i, j - i);
-                    bool isPalindrome = IsPalindrome(palindromeCandidant);
+        {
+            int i = default(int);
+            int j = default(int);
 
-                    if (isPalindrome && palindromeCandidant.Length > longestPalindrome.Length)
-                        longestPalindrome = palindromeCandidant;
+            while (i < s.Length)
+            {
+                string palindromeCandidant = s.Substring(i, j - i);
+                bool isPalindrome = IsPalindrome(palindromeCandidant);
+
+                if (isPalindrome && palindromeCandidant.Length > longestPalindrome.Length)
+                    longestPalindrome = palindromeCandidant;
+
+                if (j >= s.Length)
+                {
+                    i++;
+                    j = i;
                 }
+                else
+                    j++;
+            }
+        }
 
         return longestPalindrome;
     }
