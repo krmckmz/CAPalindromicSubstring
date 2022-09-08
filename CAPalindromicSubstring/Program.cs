@@ -22,6 +22,9 @@
             while (i < s.Length)
             {
                 string palindromeCandidant = s.Substring(i, j - i);
+                if (longestPalindrome.Length > s.Length - i - 1)
+                    break;
+
                 bool isPalindrome = IsPalindrome(palindromeCandidant);
 
                 if (isPalindrome && palindromeCandidant.Length > longestPalindrome.Length)
@@ -43,7 +46,13 @@
     public static bool IsPalindrome(string s)
     {
         char[] palindromeCandidantChars = s.ToCharArray();
-        Array.Reverse(palindromeCandidantChars);
+        for (int i = 0; i < palindromeCandidantChars.Length / 2; i++)
+        {
+            var tmp = palindromeCandidantChars[i];
+            palindromeCandidantChars[i] = palindromeCandidantChars[palindromeCandidantChars.Length - i - 1];
+            palindromeCandidantChars[palindromeCandidantChars.Length - i - 1] = tmp;
+        }
+
         bool isPalindrome = new String(palindromeCandidantChars) == s ? true : default(bool);
 
         return isPalindrome;
