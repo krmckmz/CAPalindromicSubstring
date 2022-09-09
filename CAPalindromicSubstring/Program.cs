@@ -1,8 +1,8 @@
-﻿class Program
+class Program
 {
     static void Main(string[] args)
     {
-        var s = "cbbd";
+        var s = "ac";
         var result = LongestPalindrome(s);
         Console.WriteLine(result);
         Console.ReadLine();
@@ -11,50 +11,46 @@
     public static string LongestPalindrome(string s)
     {
         string longestPalindrome = string.Empty;
+        int longestPalindromeLength = default(int);
 
-        if (IsPalindrome(s))
-            return s;
-        else
+        for (int i = 0; i < s.Length; i++)
         {
-            int i = default(int);
-            int j = default(int);
+              
+                int leftPointer = i;
+                int rightPointer = i;
 
-            while (i < s.Length)
-            {
-                string palindromeCandidant = s.Substring(i, j - i);
-                if (longestPalindrome.Length > s.Length - i - 1)
-                    break;
-
-                bool isPalindrome = IsPalindrome(palindromeCandidant);
-
-                if (isPalindrome && palindromeCandidant.Length > longestPalindrome.Length)
-                    longestPalindrome = palindromeCandidant;
-
-                if (j >= s.Length)
+                while (leftPointer >= 0 && rightPointer < s.Length && s[leftPointer] == s[rightPointer])
                 {
-                    i++;
-                    j = i;
+                    if (rightPointer - leftPointer + 1 > longestPalindromeLength)
+                    {
+                        longestPalindrome = s.Substring(leftPointer, rightPointer - leftPointer + 1);
+                        longestPalindromeLength = rightPointer - leftPointer + 1;
+                    }
+
+                    leftPointer -= 1;
+                    rightPointer += 1;
                 }
-                else
-                    j++;
-            }
+            
+        
+                 leftPointer = i;
+                 rightPointer = i + 1;
+
+                while (leftPointer >= 0 && rightPointer < s.Length && s[leftPointer] == s[rightPointer])
+                {
+                    if (rightPointer - leftPointer + 1 > longestPalindromeLength)
+                    {
+                        longestPalindrome = s.Substring(leftPointer, rightPointer - leftPointer + 1);
+                        longestPalindromeLength = rightPointer - leftPointer + 1;
+                    }
+
+                    leftPointer -= 1;
+                    rightPointer += 1;
+                }
+            
         }
+
 
         return longestPalindrome;
     }
 
-    public static bool IsPalindrome(string s)
-    {
-        char[] palindromeCandidantChars = s.ToCharArray();
-        for (int i = 0; i < palindromeCandidantChars.Length / 2; i++)
-        {
-            var tmp = palindromeCandidantChars[i];
-            palindromeCandidantChars[i] = palindromeCandidantChars[palindromeCandidantChars.Length - i - 1];
-            palindromeCandidantChars[palindromeCandidantChars.Length - i - 1] = tmp;
-        }
-
-        bool isPalindrome = new String(palindromeCandidantChars) == s ? true : default(bool);
-
-        return isPalindrome;
-    }
 }
