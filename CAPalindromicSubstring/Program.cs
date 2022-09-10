@@ -2,7 +2,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var s = "ac";
+        var s = "rteeterertabbacxzxcxcztyyt";
         var result = LongestPalindrome(s);
         Console.WriteLine(result);
         Console.ReadLine();
@@ -14,8 +14,7 @@ class Program
         int longestPalindromeLength = default(int);
 
         for (int i = 0; i < s.Length; i++)
-        {
-              
+        {         
                 int leftPointer = i;
                 int rightPointer = i;
 
@@ -30,8 +29,7 @@ class Program
                     leftPointer -= 1;
                     rightPointer += 1;
                 }
-            
-        
+                    
                  leftPointer = i;
                  rightPointer = i + 1;
 
@@ -45,10 +43,8 @@ class Program
 
                     leftPointer -= 1;
                     rightPointer += 1;
-                }
-            
+                }          
         }
-
 
         return longestPalindrome;
     }
